@@ -1,0 +1,40 @@
+{
+  "source": "/kaggle/input/datasets/faiyazabdullah/electrocom61/ElectroCom61 A Multiclass Dataset for Detection of Electronic Components/ElectroCom-61_v2",
+  "near_dup_bits": 6,
+  "seed": 0,
+  "ratios": [
+    0.75,
+    0.15,
+    0.1
+  ],
+  "images_scanned": 2121,
+  "images_written": 2121,
+  "groups": 2104,
+  "largest_groups": [
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "split_images": {
+    "train": 1569,
+    "val": 322,
+    "test": 230
+  },
+  "split_boxes": {
+    "train": 9694,
+    "val": 1949,
+    "test": 1294
+  },
+  "classes_missing_from_val": [],
+  "classes_missing_from_test": [],
+  "checks": {
+    "near_duplicate_pairs": 17
+  }
+}
