@@ -1,0 +1,1019 @@
+{
+  "_meta": {
+    "version": 2,
+    "safety": "For low-voltage (5 V or less) learning circuits. Not a safety check. Never use on mains wiring.",
+    "note": "Keys are the exact class names of the CircuitCoach YOLO26n model. Classes without a card show their name only. References marked checked=false still need to be opened and confirmed.",
+    "fields": [
+      "name",
+      "category",
+      "purpose",
+      "key_facts",
+      "cautions",
+      "cannot_tell",
+      "could_also_be",
+      "references"
+    ]
+  },
+  "cards": {
+    "7-Segment-Display": {
+      "name": "7-segment display",
+      "category": "Display",
+      "purpose": "Shows digits 0-9 (and a few letters) using seven LED bars, for counters, clocks and timers.",
+      "key_facts": [
+        "Seven segments named a-g plus a decimal point (DP)",
+        "Common-cathode type: shared pin to GND; common-anode type: shared pin to +",
+        "Multi-digit displays are driven one digit at a time (multiplexing) or with a driver chip"
+      ],
+      "cautions": [
+        "Each segment is an LED and needs its own current-limiting resistor"
+      ],
+      "cannot_tell": [
+        "Whether it is common-anode or common-cathode - check the part number or test one segment"
+      ],
+      "could_also_be": [
+        "LCD-Display"
+      ],
+      "references": [
+        {
+          "title": "Beginner Parts Kit Identification Guide (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/beginner-parts-kit-identification-guide/all",
+          "checked": true
+        }
+      ]
+    },
+    "Arduino-Mega": {
+      "name": "Arduino Mega 2560",
+      "category": "Microcontroller board",
+      "purpose": "A large Arduino board with many more pins, for projects with lots of sensors, motors or displays.",
+      "key_facts": [
+        "ATmega2560 microcontroller at 16 MHz, 5 V logic",
+        "54 digital pins (15 PWM) and 16 analog inputs",
+        "4 hardware serial ports and 256 KB of program memory"
+      ],
+      "cautions": [
+        "Same per-pin current limits as the Uno - use drivers for motors and relays"
+      ],
+      "cannot_tell": [
+        "Genuine board or clone"
+      ],
+      "could_also_be": [
+        "Arduino-Uno"
+      ],
+      "references": [
+        {
+          "title": "Arduino Mega 2560 Rev3 (official)",
+          "url": "https://docs.arduino.cc/hardware/mega-2560/",
+          "checked": false
+        }
+      ]
+    },
+    "Arduino-Nano": {
+      "name": "Arduino Nano",
+      "category": "Microcontroller board",
+      "purpose": "A small, breadboard-friendly Arduino with the same chip as the Uno. Plug it straight into a breadboard for compact projects.",
+      "key_facts": [
+        "Classic Nano: ATmega328P at 16 MHz, 5 V logic",
+        "14 digital pins (6 PWM) and 8 analog inputs; A6 and A7 are analog-only",
+        "Original board uses a mini-USB connector; many clones use a CH340 USB chip that needs a driver"
+      ],
+      "cautions": [
+        "Same current limits as the Uno: do not drive motors directly from its pins",
+        "Nano 33 IoT, Nano 33 BLE and Nano ESP32 look similar but use 3.3 V logic - 5 V signals can damage them"
+      ],
+      "cannot_tell": [
+        "Whether it is the classic 5 V Nano or a 3.3 V Nano variant",
+        "Genuine board or clone"
+      ],
+      "could_also_be": [
+        "Arduino-Uno"
+      ],
+      "references": [
+        {
+          "title": "Arduino Nano datasheet (official, A000005)",
+          "url": "https://docs.arduino.cc/resources/datasheets/A000005-datasheet.pdf",
+          "checked": true
+        }
+      ]
+    },
+    "Arduino-Uno": {
+      "name": "Arduino Uno",
+      "category": "Microcontroller board",
+      "purpose": "A microcontroller board that runs your program (sketch) and reads sensors or drives LEDs, buzzers and other parts. The most common first board for learning.",
+      "key_facts": [
+        "Classic Uno R3: ATmega328P microcontroller at 16 MHz, 5 V logic",
+        "14 digital pins (6 can output PWM: 3, 5, 6, 9, 10, 11) and 6 analog inputs (A0-A5)",
+        "Powered by USB, or 7-12 V on the barrel jack / VIN pin",
+        "About 20 mA per I/O pin is the safe working limit; 40 mA is the absolute maximum"
+      ],
+      "cautions": [
+        "Never power motors or several servos from the 5 V pin - use a separate supply and a driver",
+        "Always put a resistor in series with an LED on an output pin",
+        "Its pins output 5 V: check that 3.3 V modules can accept 5 V signals"
+      ],
+      "cannot_tell": [
+        "Whether the board is a genuine Arduino or a clone",
+        "Which revision it is - newer Uno R4 boards look similar but use a different chip"
+      ],
+      "could_also_be": [
+        "Arduino-Mega"
+      ],
+      "references": [
+        {
+          "title": "Arduino Uno Rev3 pinout (official, A000073)",
+          "url": "https://docs.arduino.cc/resources/pinouts/A000073-full-pinout.pdf",
+          "checked": true
+        },
+        {
+          "title": "Overview of the Arduino UNO components (official)",
+          "url": "https://docs.arduino.cc/tutorials/uno-rev3/intro-to-board",
+          "checked": true
+        }
+      ]
+    },
+    "BJT-Transistor": {
+      "name": "BJT transistor",
+      "category": "Semiconductor",
+      "purpose": "A small current into the base controls a larger current through the transistor, so a microcontroller pin can switch an LED strip, buzzer, relay or small motor.",
+      "key_facts": [
+        "Three legs: collector, base and emitter",
+        "NPN types (for example BC547, 2N2222, 2N3904) and PNP types (for example BC557, 2N3906)",
+        "Use a resistor between the microcontroller pin and the base (around 1 kOhm is a common start)"
+      ],
+      "cautions": [
+        "Pin order differs between part numbers - read the number on the flat face and check its datasheet",
+        "Add a flyback diode when switching motors or relays"
+      ],
+      "cannot_tell": [
+        "Whether it is NPN or PNP, or its part number",
+        "Other parts in the same black 3-leg package (MOSFETs, voltage regulators, temperature sensors) look alike"
+      ],
+      "could_also_be": [
+        "MOSFET",
+        "IGBT"
+      ],
+      "references": [
+        {
+          "title": "Transistors (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/transistors",
+          "checked": true
+        }
+      ]
+    },
+    "Bluetooth-Module": {
+      "name": "Bluetooth module (HC-05 / HC-06)",
+      "category": "Communication module",
+      "purpose": "Adds a wireless serial link so a phone app can send commands to, or receive data from, your project.",
+      "key_facts": [
+        "Talks to the microcontroller over UART serial (TX/RX)",
+        "Default data speed is 9600 baud (HC-05 AT command mode uses 38400)",
+        "Uses classic Bluetooth serial: works with Android phone apps; iPhones do not support this profile"
+      ],
+      "cautions": [
+        "Its RX pin uses 3.3 V logic - use a voltage divider (for example 1 kOhm and 2 kOhm) from a 5 V Arduino's TX",
+        "Power the VCC pin from 3.6-6 V (5 V is typical)"
+      ],
+      "cannot_tell": [
+        "Whether it is an HC-05 or HC-06, or a BLE module that looks similar"
+      ],
+      "could_also_be": [
+        "RFID-Scanner",
+        "GSM-Module"
+      ],
+      "references": [
+        {
+          "title": "HC-05 ZS-040 Bluetooth module (ProtoSupplies)",
+          "url": "https://protosupplies.com/product/hc-05-zs-040-bluetooth-module/",
+          "checked": true
+        }
+      ]
+    },
+    "Breadboard": {
+      "name": "Breadboard",
+      "category": "Prototyping",
+      "purpose": "A reusable board for building circuits without soldering: push component legs and jumper wires into the holes.",
+      "key_facts": [
+        "Each short row of 5 holes is connected inside; rows on opposite sides of the centre gap are not connected",
+        "Chips (ICs) straddle the centre gap so each pin gets its own row",
+        "The long + and - rails along the edges carry power; on some long boards the rails are split in the middle"
+      ],
+      "cautions": [
+        "For low-voltage, low-current circuits only - never mains",
+        "Worn contacts cause loose connections; press parts in firmly"
+      ],
+      "cannot_tell": [
+        "Whether the power rails are split in the middle - check with a multimeter"
+      ],
+      "could_also_be": [],
+      "references": [
+        {
+          "title": "How to Use a Breadboard (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard",
+          "checked": true
+        }
+      ]
+    },
+    "Buck-Converter": {
+      "name": "Buck converter (step-down module)",
+      "category": "Power module",
+      "purpose": "Efficiently lowers a higher DC voltage to a lower one - for example from a 12 V battery to 5 V for an Arduino and servos.",
+      "key_facts": [
+        "Common modules use the LM2596 chip (input up to 40 V, up to 3 A); the output voltage is set with the multi-turn trimmer",
+        "The input must be a couple of volts higher than the output",
+        "Much more efficient than a linear regulator, so it stays cooler"
+      ],
+      "cautions": [
+        "Set the output with a multimeter before connecting your circuit",
+        "Check input and output polarity - many modules have no reverse-polarity protection"
+      ],
+      "cannot_tell": [
+        "Its current rating or which chip it uses"
+      ],
+      "could_also_be": [
+        "Motor-Driver"
+      ],
+      "references": [
+        {
+          "title": "LM2596 datasheet (Texas Instruments)",
+          "url": "https://shop.boxtec.ch/pub/seeed/lm2596.pdf",
+          "checked": true
+        }
+      ]
+    },
+    "Buzzer": {
+      "name": "Buzzer",
+      "category": "Sound output",
+      "purpose": "Makes beeps and tones for alarms, timers and feedback in projects.",
+      "key_facts": [
+        "Active buzzer: has a built-in oscillator and beeps when you simply apply DC (digitalWrite HIGH)",
+        "Passive buzzer: needs a changing signal, for example Arduino's tone() function, and can play different notes",
+        "Usually polarised: the + leg is often marked and longer"
+      ],
+      "cautions": [
+        "Connect with the correct polarity",
+        "Larger buzzers may need a transistor instead of a direct pin connection"
+      ],
+      "cannot_tell": [
+        "Whether it is active or passive",
+        "Its rated voltage"
+      ],
+      "could_also_be": [
+        "Inductor",
+        "Push-Switch"
+      ],
+      "references": [
+        {
+          "title": "tone() - Arduino language reference",
+          "url": "https://docs.arduino.cc/language-reference/en/functions/advanced-io/tone/",
+          "checked": false
+        }
+      ]
+    },
+    "Capacitor-10mf": {
+      "name": "Electrolytic capacitor (small, labelled 10mf)",
+      "category": "Passive component",
+      "purpose": "Stores charge for smoothing, decoupling and simple timing circuits.",
+      "key_facts": [
+        "In this dataset the label most likely means 10 microfarads (uF)",
+        "Polarised: the stripe marks the negative (-) leg, which is also shorter",
+        "Read the capacitance and voltage rating on the body"
+      ],
+      "cautions": [
+        "Respect the polarity and the voltage rating"
+      ],
+      "cannot_tell": [
+        "Its exact capacitance and voltage rating"
+      ],
+      "could_also_be": [
+        "Capacitor-470mf",
+        "Diode",
+        "BJT-Transistor"
+      ],
+      "references": [
+        {
+          "title": "Capacitors (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/capacitors",
+          "checked": false
+        }
+      ]
+    },
+    "Capacitor-470mf": {
+      "name": "Electrolytic capacitor (large, labelled 470mf)",
+      "category": "Passive component",
+      "purpose": "Stores charge to smooth a power supply and absorb current spikes, for example near motors or on a breadboard's power rails.",
+      "key_facts": [
+        "In this dataset the label most likely means 470 microfarads (uF)",
+        "Polarised: the stripe on the side marks the negative (-) leg, which is also shorter",
+        "The voltage rating is printed on the can"
+      ],
+      "cautions": [
+        "Connecting it backwards or above its voltage rating can make it bulge or burst",
+        "Large capacitors can stay charged after power is removed"
+      ],
+      "cannot_tell": [
+        "Its exact capacitance and voltage rating - read the printing"
+      ],
+      "could_also_be": [
+        "Capacitor-10mf"
+      ],
+      "references": [
+        {
+          "title": "Capacitors (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/capacitors",
+          "checked": false
+        }
+      ]
+    },
+    "DC-Motor": {
+      "name": "DC motor",
+      "category": "Actuator",
+      "purpose": "Spins when connected to DC power; used for wheels, fans and other moving parts.",
+      "key_facts": [
+        "Speed rises with voltage; swapping the two wires reverses the direction",
+        "Speed can be controlled with PWM through a driver",
+        "Draws much more current when starting or stalled than when running freely"
+      ],
+      "cautions": [
+        "Never connect it directly to an Arduino pin - use a transistor/MOSFET with a flyback diode, or a motor driver board",
+        "Power it from a separate supply, sharing ground with the microcontroller"
+      ],
+      "cannot_tell": [
+        "Its rated voltage, current or speed"
+      ],
+      "could_also_be": [
+        "Servo-Motor"
+      ],
+      "references": [
+        {
+          "title": "Motors and Selecting the Right One (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/motors-and-selecting-the-right-one",
+          "checked": true
+        }
+      ]
+    },
+    "Diode": {
+      "name": "Diode (rectifier)",
+      "category": "Semiconductor",
+      "purpose": "Lets current flow in one direction only. Used to protect circuits from reverse power and to absorb voltage spikes from motors and relays.",
+      "key_facts": [
+        "The band on the body marks the cathode (-) end",
+        "A silicon diode drops about 0.6-0.7 V when conducting",
+        "Common rectifier diodes such as the 1N4001-1N4007 family have a black body"
+      ],
+      "cautions": [
+        "Check the direction before powering the circuit",
+        "Across a motor or relay coil, the band faces the + supply (flyback diode)"
+      ],
+      "cannot_tell": [
+        "Its exact part number, current or voltage rating",
+        "Whether a small glass diode is a normal diode or a Zener diode"
+      ],
+      "could_also_be": [
+        "Zener-Diode",
+        "Resistor"
+      ],
+      "references": [
+        {
+          "title": "Diodes (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/diodes",
+          "checked": true
+        }
+      ]
+    },
+    "ESP32": {
+      "name": "ESP32 development board",
+      "category": "Microcontroller board (Wi-Fi + Bluetooth)",
+      "purpose": "A fast microcontroller with built-in Wi-Fi and Bluetooth, used for IoT projects that send data to a phone or the internet.",
+      "key_facts": [
+        "ESP32 chip: dual-core 32-bit Xtensa LX6, up to 240 MHz",
+        "Built-in 2.4 GHz Wi-Fi and Bluetooth (Classic and Low Energy)",
+        "Runs at 3.3 V; programmable with the Arduino IDE or Espressif's ESP-IDF"
+      ],
+      "cautions": [
+        "Its pins are 3.3 V - do not connect 5 V signals directly (use a voltage divider or level shifter)",
+        "Wi-Fi causes current spikes: use a good USB cable and supply",
+        "Some pins (for example GPIO0, 2, 12, 15) affect booting - avoid them for inputs at first"
+      ],
+      "cannot_tell": [
+        "Which ESP32 variant it is (ESP32, S2, S3, C3 boards can look alike)",
+        "Flash memory size"
+      ],
+      "could_also_be": [
+        "ESP32-CAM",
+        "Arduino-Nano"
+      ],
+      "references": [
+        {
+          "title": "ESP32 Series Datasheet (Espressif)",
+          "url": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+          "checked": true
+        },
+        {
+          "title": "ESP32-WROOM-32 module datasheet (Espressif)",
+          "url": "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf",
+          "checked": true
+        }
+      ]
+    },
+    "ESP32-CAM": {
+      "name": "ESP32-CAM",
+      "category": "Camera module (Wi-Fi)",
+      "purpose": "A small ESP32 board with a camera and microSD slot, used for photo capture, video streaming and simple vision projects.",
+      "key_facts": [
+        "ESP32 chip with a 2 MP OV2640 camera and a microSD card slot (common AI-Thinker board)",
+        "The basic board has no USB port: program it through a USB-to-serial adapter (for example an FT232 module) or an ESP32-CAM-MB base board",
+        "To upload code, connect GPIO0 to GND and reset the board"
+      ],
+      "cautions": [
+        "Use 3.3 V logic on the serial pins",
+        "A weak power supply causes 'brownout' resets - give it a solid 5 V supply"
+      ],
+      "cannot_tell": [
+        "The exact board maker or camera version"
+      ],
+      "could_also_be": [
+        "ESP32"
+      ],
+      "references": [
+        {
+          "title": "ESP32-CAM (Ai-Thinker documentation)",
+          "url": "https://docs.ai-thinker.com/en/esp32-cam",
+          "checked": false
+        }
+      ]
+    },
+    "Gas-Sensor": {
+      "name": "Gas sensor module (MQ series)",
+      "category": "Sensor",
+      "purpose": "Detects gases such as smoke, LPG, alcohol or air pollutants, depending on the MQ number printed on it - for learning about gas-sensing projects.",
+      "key_facts": [
+        "Contains a heater: the sensor gets warm and draws more current than most sensors",
+        "Analog output rises with gas concentration; digital output switches at a threshold set by the trimmer",
+        "The MQ number (MQ-2, MQ-3, MQ-135 ...) decides which gases it is most sensitive to"
+      ],
+      "cautions": [
+        "Let it warm up a few minutes before each reading; a new sensor needs a 24-48 hour first burn-in for stable readings",
+        "Not a certified safety or gas-leak detector - never rely on it to protect people",
+        "The metal cap gets hot"
+      ],
+      "cannot_tell": [
+        "Which MQ type it is - read the number on the sensor"
+      ],
+      "could_also_be": [
+        "Humidity-Sensor"
+      ],
+      "references": [
+        {
+          "title": "MQ-2 datasheet (Winsen)",
+          "url": "https://www.winsen-sensor.com/d/files/MQ-2.pdf",
+          "checked": true
+        },
+        {
+          "title": "MQ gas sensors (Arduino Playground)",
+          "url": "https://www.arduino.cc/playground/Main/MQGasSensors/",
+          "checked": true
+        }
+      ]
+    },
+    "Humidity-Sensor": {
+      "name": "Temperature and humidity sensor (DHT11 / DHT22)",
+      "category": "Sensor",
+      "purpose": "Measures air temperature and relative humidity - for weather stations, greenhouses and room monitors.",
+      "key_facts": [
+        "One data wire plus power; Arduino library: DHT sensor library",
+        "DHT11 (usually blue): 0-50 C (+/-2 C), 20-80 % RH (+/-5 %), one reading per second",
+        "DHT22/AM2302 (usually white): -40 to 80 C (+/-0.5 C), 0-100 % RH, one reading every 2 seconds"
+      ],
+      "cautions": [
+        "Reading faster than the sensor allows returns errors or old values",
+        "Bare sensors need a pull-up resistor (about 10 kOhm) on the data pin; most modules already have one"
+      ],
+      "cannot_tell": [
+        "Whether it is a DHT11 or DHT22 for certain - colour is only a hint"
+      ],
+      "could_also_be": [
+        "Gas-Sensor"
+      ],
+      "references": [
+        {
+          "title": "DHT11, DHT22 and AM2302 sensors (Adafruit)",
+          "url": "https://learn.adafruit.com/dht",
+          "checked": true
+        }
+      ]
+    },
+    "IR-Sensor": {
+      "name": "IR obstacle sensor module",
+      "category": "Sensor",
+      "purpose": "Detects a nearby object by shining infrared light and sensing the reflection - used for obstacle-avoiding robots and object counters.",
+      "key_facts": [
+        "An IR LED and an IR receiver side by side, plus a comparator chip",
+        "Digital output: on most modules OUT goes LOW when an object is detected",
+        "The blue trimmer sets the detection distance (a few centimetres)"
+      ],
+      "cautions": [
+        "Sunlight and strong lamps cause false readings",
+        "Black or shiny surfaces reflect less IR and may not be detected"
+      ],
+      "cannot_tell": [
+        "Whether its output is active-LOW or active-HIGH"
+      ],
+      "could_also_be": [
+        "TCRT5000",
+        "Arduino-Nano"
+      ],
+      "references": []
+    },
+    "Keypad": {
+      "name": "Membrane keypad (4x4)",
+      "category": "Input",
+      "purpose": "A flat keypad for entering numbers and codes - for password locks, calculators and menus.",
+      "key_facts": [
+        "16 keys in 4 rows and 4 columns, so it needs 8 pins (a 3x4 keypad needs 7)",
+        "The microcontroller scans rows and columns to find the pressed key",
+        "Arduino library: Keypad"
+      ],
+      "cautions": [
+        "Uses many pins - on small boards plan pins before wiring other parts"
+      ],
+      "cannot_tell": [
+        "The row and column order of the ribbon pins - check the datasheet or test"
+      ],
+      "could_also_be": [],
+      "references": [
+        {
+          "title": "4x3 and 4x4 membrane keypad with Arduino (Last Minute Engineers)",
+          "url": "https://lastminuteengineers.com/arduino-keypad-tutorial/",
+          "checked": true
+        }
+      ]
+    },
+    "LCD-Display": {
+      "name": "Character LCD (16x2)",
+      "category": "Display",
+      "purpose": "Shows text and numbers on 2 lines of 16 characters - for sensor readings, menus and messages.",
+      "key_facts": [
+        "Uses the standard HD44780-compatible controller; Arduino library: LiquidCrystal",
+        "Wired directly it needs about 6 data/control pins",
+        "With an I2C backpack board it needs only SDA and SCL (common addresses 0x27 or 0x3F; library LiquidCrystal_I2C)"
+      ],
+      "cautions": [
+        "If you see blank boxes or nothing, turn the contrast potentiometer first"
+      ],
+      "cannot_tell": [
+        "Whether an I2C backpack is fitted on the back, or its I2C address"
+      ],
+      "could_also_be": [
+        "OLED-Display",
+        "Keypad"
+      ],
+      "references": [
+        {
+          "title": "Character LCDs (Adafruit)",
+          "url": "https://learn.adafruit.com/character-lcds",
+          "checked": false
+        }
+      ]
+    },
+    "LDR-Sensor": {
+      "name": "LDR (light-dependent resistor)",
+      "category": "Sensor",
+      "purpose": "A resistor whose value falls as light increases - used for automatic night lamps and light-level sensing.",
+      "key_facts": [
+        "Bright light: low resistance; darkness: high resistance",
+        "Read it with a voltage divider (LDR + fixed resistor, for example 10 kOhm) into an analog pin",
+        "Has no polarity - either way round works"
+      ],
+      "cautions": [
+        "It responds slowly and is not calibrated - use it to compare light levels, not to measure lux"
+      ],
+      "cannot_tell": [
+        "Its resistance range"
+      ],
+      "could_also_be": [
+        "LED-Light",
+        "NTC-Thermistor"
+      ],
+      "references": [
+        {
+          "title": "Photocells (Adafruit)",
+          "url": "https://learn.adafruit.com/photocells",
+          "checked": false
+        }
+      ]
+    },
+    "LED-Light": {
+      "name": "LED",
+      "category": "Light output",
+      "purpose": "A light-emitting diode used as an indicator light or for simple light effects.",
+      "key_facts": [
+        "The longer leg is the anode (+); the flat edge of the rim marks the cathode (-)",
+        "Always use a series resistor: R = (supply voltage - LED voltage) / current",
+        "Example at 5 V: a red LED (about 2 V) at about 15 mA needs roughly 200 Ohm, so use 220 Ohm"
+      ],
+      "cautions": [
+        "Without a resistor the LED and the microcontroller pin can be damaged"
+      ],
+      "cannot_tell": [
+        "Its exact forward voltage or brightness rating"
+      ],
+      "could_also_be": [
+        "LDR-Sensor"
+      ],
+      "references": [
+        {
+          "title": "Light-Emitting Diodes (LEDs) (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/light-emitting-diodes-leds",
+          "checked": true
+        }
+      ]
+    },
+    "Motion-Sensor": {
+      "name": "PIR motion sensor (HC-SR501)",
+      "category": "Sensor",
+      "purpose": "Detects movement of people or animals by sensing changes in infrared (body heat) - used for alarms and automatic lights.",
+      "key_facts": [
+        "Powered from about 5 V (4.5-20 V); output is a 3.3 V digital HIGH when motion is detected",
+        "Two potentiometers: sensitivity (range up to about 7 m) and how long the output stays HIGH",
+        "A jumper selects single or repeat trigger mode"
+      ],
+      "cautions": [
+        "Wait about 30-60 seconds after power-up before trusting the output",
+        "Heaters, sunlight and fans can cause false triggers"
+      ],
+      "cannot_tell": [
+        "How the potentiometers and jumper are set"
+      ],
+      "could_also_be": [],
+      "references": [
+        {
+          "title": "HC-SR501 PIR sensor (Components101)",
+          "url": "https://components101.com/sensors/hc-sr501-pir-sensor",
+          "checked": true
+        },
+        {
+          "title": "HC-SR501 module user guide (Handson Technology)",
+          "url": "https://handsontec.com/dataspecs/sensor/PIR%20SR501%20Motion%20Sensor.pdf",
+          "checked": true
+        }
+      ]
+    },
+    "Motor-Driver": {
+      "name": "Motor driver module (L298N type)",
+      "category": "Driver module",
+      "purpose": "Lets a microcontroller control the speed and direction of DC motors, which need far more current than a pin can give. The usual choice for two-wheel robot cars.",
+      "key_facts": [
+        "Dual H-bridge: drives 2 DC motors (or 1 stepper) in both directions",
+        "About 2 A continuous per channel; motor supply 5-35 V",
+        "IN1/IN2 and IN3/IN4 set direction; PWM on ENA/ENB sets speed",
+        "Drops about 2 V, so a 12 V supply gives the motors roughly 10 V"
+      ],
+      "cautions": [
+        "Remove the 5 V regulator jumper if the motor supply is above 12 V, and then supply 5 V logic separately",
+        "Connect the driver GND to the microcontroller GND",
+        "The heat sink gets hot at high current"
+      ],
+      "cannot_tell": [
+        "Which driver chip it uses (L298N, L293D and other boards look similar)"
+      ],
+      "could_also_be": [
+        "Heat-Sink",
+        "Relay-Module"
+      ],
+      "references": [
+        {
+          "title": "L298N motor driver module with Arduino (Last Minute Engineers)",
+          "url": "https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/",
+          "checked": true
+        },
+        {
+          "title": "L298N module user guide (Envistia)",
+          "url": "https://envistiamall.com/blogs/learn/l298n-dual-h-bridge-dc-stepper-motor-driver-module-user-guide",
+          "checked": true
+        }
+      ]
+    },
+    "OLED-Display": {
+      "name": "OLED display (0.96 inch)",
+      "category": "Display",
+      "purpose": "A small, sharp graphics screen for text, numbers, icons and simple graphs.",
+      "key_facts": [
+        "Common type: 128 x 64 pixels with an SSD1306 controller",
+        "4-pin versions use I2C (usually address 0x3C); 6-7 pin versions use SPI",
+        "Arduino libraries: Adafruit SSD1306 + Adafruit GFX, or U8g2"
+      ],
+      "cautions": [
+        "Check VCC: many modules accept 3.3-5 V, but not all",
+        "1.3 inch versions often use the SH1106 controller and need a different library setting"
+      ],
+      "cannot_tell": [
+        "Its controller chip or I2C address"
+      ],
+      "could_also_be": [
+        "LCD-Display"
+      ],
+      "references": [
+        {
+          "title": "Monochrome OLED breakouts (Adafruit)",
+          "url": "https://learn.adafruit.com/monochrome-oled-breakouts",
+          "checked": false
+        }
+      ]
+    },
+    "Push-Switch": {
+      "name": "Push button switch",
+      "category": "Input",
+      "purpose": "A momentary button: connected only while pressed. Used for start, reset and user input.",
+      "key_facts": [
+        "Read it with a digital pin and a pull-up or pull-down resistor",
+        "With pinMode(pin, INPUT_PULLUP) the pin reads LOW when the button is pressed",
+        "Buttons 'bounce': add a short delay or debounce code"
+      ],
+      "cautions": [
+        "Without a pull-up or pull-down the input floats and gives random readings"
+      ],
+      "cannot_tell": [
+        "Its current rating, or which legs are connected inside - check with a multimeter"
+      ],
+      "could_also_be": [
+        "Tact-Switch",
+        "Buzzer",
+        "Inductor"
+      ],
+      "references": [
+        {
+          "title": "Button and Switch Basics (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/switch-basics",
+          "checked": false
+        }
+      ]
+    },
+    "Relay-Module": {
+      "name": "Relay module",
+      "category": "Switching module",
+      "purpose": "An electrically controlled switch: a small signal from the microcontroller turns a separate circuit on or off, with no electrical connection between them.",
+      "key_facts": [
+        "Contacts: COM (common), NO (normally open), NC (normally closed)",
+        "The module includes the transistor and flyback diode needed to drive the relay coil",
+        "Many modules are active-LOW: writing LOW to IN switches the relay on"
+      ],
+      "cautions": [
+        "The printed ratings (for example 10 A 250 VAC) are not an invitation: learners should only switch low-voltage loads - never mains",
+        "The relay clicks and draws more current than a sensor; power it from 5 V, not a 3.3 V pin"
+      ],
+      "cannot_tell": [
+        "Its coil voltage or whether it is active-HIGH or active-LOW"
+      ],
+      "could_also_be": [
+        "Motor-Driver"
+      ],
+      "references": [
+        {
+          "title": "Button and Switch Basics - relays section (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/switch-basics",
+          "checked": false
+        }
+      ]
+    },
+    "Resistor": {
+      "name": "Resistor",
+      "category": "Passive component",
+      "purpose": "Limits current or sets voltages: protecting LEDs, pulling inputs up or down, and building voltage dividers.",
+      "key_facts": [
+        "Ohm's law: V = I x R",
+        "Coloured bands give the value in ohms",
+        "Common through-hole resistors are rated 1/4 W"
+      ],
+      "cautions": [
+        "Check the power rating: too much current makes it hot"
+      ],
+      "cannot_tell": [
+        "Its value - the app does not read colour bands; use the colour code or a multimeter"
+      ],
+      "could_also_be": [
+        "Diode",
+        "Zener-Diode",
+        "Fuse"
+      ],
+      "references": [
+        {
+          "title": "Resistors (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/resistors",
+          "checked": false
+        }
+      ]
+    },
+    "Servo-Motor": {
+      "name": "Servo motor (hobby micro servo)",
+      "category": "Actuator",
+      "purpose": "Turns to a set angle and holds it - used for robot arms, steering and pointers.",
+      "key_facts": [
+        "Three wires: brown/black = GND, red = + supply (about 5 V), orange/yellow = control signal",
+        "Controlled by a pulse about every 20 ms; the pulse width (about 1-2 ms) sets the angle",
+        "Small servos such as the SG90 turn about 180 degrees; use the Arduino Servo library"
+      ],
+      "cautions": [
+        "Movement causes current spikes: power several servos from a separate 5 V supply with a shared ground",
+        "Do not force the horn by hand - the plastic gears strip easily"
+      ],
+      "cannot_tell": [
+        "Its torque or whether it is a continuous-rotation servo"
+      ],
+      "could_also_be": [
+        "DC-Motor"
+      ],
+      "references": [
+        {
+          "title": "Hobby Servo Tutorial (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/hobby-servo-tutorial",
+          "checked": false
+        }
+      ]
+    },
+    "Soil-Moisture-Sensor": {
+      "name": "Soil moisture sensor",
+      "category": "Sensor",
+      "purpose": "Estimates how wet soil is - for plant-watering and smart-garden projects.",
+      "key_facts": [
+        "Two-pronged probe plus a small comparator board",
+        "A0 gives an analog value; D0 switches at a threshold set by the trimmer",
+        "Calibrate by reading it in dry soil and in wet soil"
+      ],
+      "cautions": [
+        "Resistive probes corrode quickly if powered all the time - power them only while reading",
+        "Keep the electronics board dry"
+      ],
+      "cannot_tell": [
+        "Whether it is a resistive or capacitive type for certain"
+      ],
+      "could_also_be": [
+        "Water-Sensor",
+        "Raindrops-Module"
+      ],
+      "references": []
+    },
+    "Sonar-Sensor": {
+      "name": "Ultrasonic distance sensor (HC-SR04)",
+      "category": "Sensor",
+      "purpose": "Measures distance to an object by sending a sound pulse and timing the echo - used for obstacle-avoiding robots and parking sensors.",
+      "key_facts": [
+        "Pins: VCC, Trig, Echo, GND",
+        "Range about 2 cm to 400 cm; start a reading with a 10 microsecond HIGH pulse on Trig",
+        "Echo stays HIGH for the round-trip time: distance (cm) = time (microseconds) x 0.0343 / 2"
+      ],
+      "cautions": [
+        "The classic version outputs 5 V on Echo - use a voltage divider for 3.3 V boards such as the ESP32",
+        "Soft, angled or very small objects may not reflect the sound well"
+      ],
+      "cannot_tell": [
+        "Whether it is the classic 5 V version or a 3.3-5 V version"
+      ],
+      "could_also_be": [],
+      "references": [
+        {
+          "title": "HC-SR04 datasheet (ElecFreaks)",
+          "url": "https://www.radiolocman.com/datasheet/pdf.html?di=168043",
+          "checked": true
+        },
+        {
+          "title": "HC-SR04 user manual (Cytron)",
+          "url": "https://web.eece.maine.edu/%7Ezhu/book/lab/HC-SR04%20User%20Manual.pdf",
+          "checked": true
+        }
+      ]
+    },
+    "TCRT5000": {
+      "name": "TCRT5000 reflective sensor",
+      "category": "Sensor",
+      "purpose": "A very short-range infrared reflection sensor, mainly used to tell black lines from a white surface in line-following robots.",
+      "key_facts": [
+        "One IR LED and one phototransistor in the same block",
+        "Strongest signal about 2.5 mm from the surface; useful range roughly 0.2-15 mm",
+        "On modules: D0 gives a digital output (threshold set by the trimmer), A0 gives an analog value"
+      ],
+      "cautions": [
+        "Mount it at a fixed, short height above the track",
+        "Calibrate on your actual line and floor - lighting changes the readings"
+      ],
+      "cannot_tell": [
+        "Whether it is on a module with a comparator or a bare sensor"
+      ],
+      "could_also_be": [
+        "IR-Sensor"
+      ],
+      "references": [
+        {
+          "title": "TCRT5000 datasheet (Vishay)",
+          "url": "https://www.epfl.ch/campus/associations/robopoly/wp-content/uploads/2018/09/TCRT5000.pdf",
+          "checked": true
+        }
+      ]
+    },
+    "Tact-Switch": {
+      "name": "Tactile switch",
+      "category": "Input",
+      "purpose": "A small square momentary push button that clicks when pressed - the most common button in Arduino kits.",
+      "key_facts": [
+        "Common size is 6 x 6 mm with 4 legs",
+        "The legs are connected in pairs inside; pressing joins the two pairs",
+        "Place it across the breadboard's centre gap; use INPUT_PULLUP and debounce like any button"
+      ],
+      "cautions": [
+        "Rotating it 90 degrees can short the circuit permanently - test which pairs are connected"
+      ],
+      "cannot_tell": [
+        "Which legs are paired inside - check with a multimeter"
+      ],
+      "could_also_be": [
+        "Push-Switch"
+      ],
+      "references": [
+        {
+          "title": "Button and Switch Basics (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/switch-basics",
+          "checked": false
+        }
+      ]
+    },
+    "Taper-Potentiometer": {
+      "name": "Rotary potentiometer",
+      "category": "Input",
+      "purpose": "A knob that changes resistance - used to set brightness, volume, speed or a servo angle.",
+      "key_facts": [
+        "Three pins: the outer two go to + and GND, the middle (wiper) gives a voltage between them",
+        "Read the wiper with analogRead (0-1023 on a 5 V Arduino)",
+        "Value is printed as a code, for example B10K = 10 kOhm linear"
+      ],
+      "cautions": [
+        "Do not pass motor current through it - use it only as a control input"
+      ],
+      "cannot_tell": [
+        "Its resistance or whether it is linear or logarithmic"
+      ],
+      "could_also_be": [
+        "Trimmer-Potentiometer"
+      ],
+      "references": [
+        {
+          "title": "Voltage Dividers (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/voltage-dividers",
+          "checked": false
+        }
+      ]
+    },
+    "Trimmer-Potentiometer": {
+      "name": "Trimmer potentiometer (preset)",
+      "category": "Passive component",
+      "purpose": "A small potentiometer adjusted with a screwdriver to set something once - such as LCD contrast or a sensor threshold.",
+      "key_facts": [
+        "Works like a rotary potentiometer: outer pins to the supply, middle pin is the wiper",
+        "Blue multi-turn trimmers need many turns from end to end",
+        "Many sensor modules use one to set their detection threshold"
+      ],
+      "cautions": [
+        "Turn gently with the right screwdriver - the adjuster breaks easily"
+      ],
+      "cannot_tell": [
+        "Its resistance value"
+      ],
+      "could_also_be": [
+        "Taper-Potentiometer"
+      ],
+      "references": [
+        {
+          "title": "Voltage Dividers (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/voltage-dividers",
+          "checked": false
+        }
+      ]
+    },
+    "Zener-Diode": {
+      "name": "Zener diode",
+      "category": "Semiconductor",
+      "purpose": "A diode designed to conduct backwards at a fixed voltage, used as a simple voltage reference or to limit voltage.",
+      "key_facts": [
+        "Connected 'backwards' (band/cathode towards +) with a series resistor",
+        "Holds the voltage near its Zener rating, for example 5.1 V",
+        "Usually a small glass body with a dark band"
+      ],
+      "cautions": [
+        "Always use a series resistor to limit current",
+        "Not a replacement for a proper voltage regulator under load"
+      ],
+      "cannot_tell": [
+        "Its Zener voltage - read the tiny print or measure it",
+        "Whether it is a Zener or an ordinary small-signal glass diode (such as 1N4148)"
+      ],
+      "could_also_be": [
+        "Diode",
+        "Resistor"
+      ],
+      "references": [
+        {
+          "title": "Diodes (SparkFun)",
+          "url": "https://learn.sparkfun.com/tutorials/diodes",
+          "checked": true
+        }
+      ]
+    }
+  }
+}

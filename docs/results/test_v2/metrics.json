@@ -1,0 +1,26 @@
+{
+  "weights": "/kaggle/input/notebooks/mohamedjatheel/circuitcoach-training/runs/yolo26n_ec61_v2/weights/best.pt",
+  "split": "test",
+  "images": 230,
+  "precision": 0.9262,
+  "recall": 0.94,
+  "mAP50": 0.9578,
+  "mAP50_95": 0.6488,
+  "speed_ms_per_image": {
+    "preprocess": 0.78,
+    "inference": 5.21,
+    "loss": 0.0,
+    "postprocess": 3.23
+  },
+  "failure_review": {
+    "conf": 0.25,
+    "iou": 0.5,
+    "true_boxes": 1294,
+    "correct": 1208,
+    "wrong_class": 14,
+    "missed": 72,
+    "false_boxes": 97,
+    "images_with_errors": 81
+  },
+  "classes_absent_from_split": []
+}
