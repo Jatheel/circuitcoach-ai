@@ -221,3 +221,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# CircuitCoach: never commit data, weights or tokens
+data/
+datasets/
+ec61_clean/
+ec61_eval/
+runs/
+*.pt
+*.tflite
+*.onnx
+*.zip
+.env

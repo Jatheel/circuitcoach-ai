@@ -1,0 +1,47 @@
+{
+  "file": "circuitcoach-yolo26n.onnx",
+  "size_MB": 9.94,
+  "io": {
+    "inputs": [
+      [
+        "images",
+        [
+          1,
+          3,
+          640,
+          640
+        ]
+      ]
+    ],
+    "outputs": [
+      [
+        "output0",
+        [
+          1,
+          300,
+          6
+        ]
+      ]
+    ]
+  },
+  "test": {
+    "pytorch": {
+      "mAP50": 0.9578,
+      "mAP50_95": 0.6488,
+      "precision": 0.9262,
+      "recall": 0.94
+    },
+    "onnx": {
+      "mAP50": 0.92,
+      "mAP50_95": 0.5305,
+      "precision": 0.9288,
+      "recall": 0.9347
+    }
+  },
+  "agreement_conf0.4": {
+    "boxes_pytorch": 160,
+    "boxes_onnx": 160,
+    "matched": 160,
+    "mean_iou": 1.0
+  }
+}
