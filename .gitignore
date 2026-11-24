@@ -233,3 +233,7 @@ runs/
 *.onnx
 *.zip
 .env
+# Live video outputs and local OpenVINO exports
+outputs/
+*.mp4
+*_openvino_model/

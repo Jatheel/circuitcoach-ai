@@ -76,6 +76,74 @@ thresholds the detections match PyTorch exactly.
 
 ---
 
+## Live video: detection, tracking and counting (OpenCV)
+
+<!-- Demo clip: docs/live_demo.gif (record with --save, then convert with ffmpeg) -->
+
+[`scripts/live_detect.py`](scripts/live_detect.py) turns the model into a live video
+pipeline. It reads a webcam, a video file or a phone camera (DroidCam), tracks every part with
+**ByteTrack** so each one keeps a stable ID, and counts **unique parts per class**.
+
+```mermaid
+flowchart LR
+    A[cv2.VideoCapture<br/>webcam / file / DroidCam] --> B[CLAHE<br/>optional, LAB L-channel]
+    B --> C{sharpness<br/>Laplacian variance}
+    C -- blurry --> F
+    C -- sharp --> D[model.track<br/>YOLO26n + ByteTrack]
+    D --> E[unique-ID counter<br/>min hits per ID]
+    E --> F[cv2.rectangle / putText<br/>boxes, IDs, FPS, counts]
+    F --> G[cv2.imshow]
+    F --> H[cv2.VideoWriter<br/>annotated .mp4]
+```
+
+```bash
+python scripts/live_detect.py --source 0                                # laptop webcam
+python scripts/live_detect.py --source http://<phone-ip>:4747/video     # phone via DroidCam
+python scripts/live_detect.py --source clip.mp4 --save outputs/demo.mp4 # annotate a video
+python scripts/live_detect.py --source 0 --show-sharpness               # calibrate the blur skip
+python scripts/live_detect.py --source 0 --blur-thresh 80 --clahe       # skip blurry frames, even out lighting
+```
+
+Keys: `q` quit, `p` pause, `s` snapshot. Weights are downloaded from the model page unless
+`--weights` points to a local `.pt`, `.onnx` or OpenVINO folder. On exit the script prints
+(and with `--save`, writes) a JSON summary of frames, skipped frames, FPS and unique counts.
+
+- **Tracking:** `model.track(frame, persist=True, tracker="bytetrack.yaml")`. Boxes go to the
+  tracker at a low confidence (0.1) so ByteTrack's second matching pass can keep a track alive
+  through a weak frame. Only boxes at or above `--conf` (default 0.4) are drawn and counted.
+- **Counting:** a track ID is counted once, and only after it has been seen in `--min-hits`
+  (5) frames, so one-frame flickers are not counted.
+- **Blur skip:** frames whose Laplacian variance (on a 640-px-wide grey copy) is below
+  `--blur-thresh` are not sent to the model. The last boxes stay on screen.
+- **CLAHE:** contrast-limited histogram equalisation on the lightness channel for uneven
+  desk lighting. It is off by default because the model was not trained on CLAHE images.
+- **Saved video:** `cv2.VideoWriter` (mp4v). For a camera, the writer's frame rate is
+  measured from the processing rate, so the clip plays at real speed.
+
+**Limits:**
+- A part that leaves and re-enters the frame, or an ID switch when parts overlap, gets a new
+  ID and is counted again.
+- Webcam accuracy is lower than the in-lab test numbers above (see Limitations).
+
+### CPU speed (laptop, Intel Core i7-1355U)
+
+<!-- Fill from docs/results/speed_cpu/benchmark.md after running scripts/benchmark_speed.py -->
+
+[`scripts/benchmark_speed.py`](scripts/benchmark_speed.py) times every format on the same
+video frames on CPU (10 warm-up frames, then 200 timed frames). Every format gets the same
+640×640 input. By default Ultralytics would give the `.pt` model a smaller 640×384 input on 16:9
+frames, which is not a fair comparison. It checks that each
+format draws the same boxes as PyTorch, and joins in the test-split mAP50 from the export
+reports. The INT8 model comes from [`scripts/export_openvino.py`](scripts/export_openvino.py):
+post-training quantisation of weights *and* activations, calibrated on ElectroCom61 training
+images.
+
+The w8a32 LiteRT file is not in this table as the "quantised" model. It stores int8 weights
+but computes in float32, so it is 3.5× smaller but not faster on CPU: 87.7 ms vs 57.2 ms for
+float32 in [`export_report.json`](docs/results/export_report.json).
+
+---
+
 ## How it works
 
 ```mermaid
@@ -88,6 +156,8 @@ flowchart LR
     E --> F
     F --> G[Web demo<br/>ONNX Runtime Web in the browser]
     H[knowledge/components.json<br/>36 sourced cards] --> G
+    F --> I[live_detect.py<br/>OpenCV video + ByteTrack]
+    E --> J[export_openvino.py → benchmark_speed.py<br/>INT8, CPU FPS]
 ```
 
 ### 1. Data cleaning and a leakage-safe split — [`scripts/prepare_dataset.py`](scripts/prepare_dataset.py)
@@ -140,16 +210,24 @@ cautions, **what the camera cannot tell** (resistor values, Zener voltage, NPN v
 look-alike classes and sources (datasheets and official documentation). No language model is
 used, because a wrong answer about wiring can damage parts.
 
+### 7. Live video and CPU optimisation — [`scripts/live_detect.py`](scripts/live_detect.py), [`scripts/export_openvino.py`](scripts/export_openvino.py), [`scripts/benchmark_speed.py`](scripts/benchmark_speed.py)
+
+An OpenCV video loop with ByteTrack tracking and unique-part counts, an OpenVINO FP32/INT8
+export with an accuracy check, and a CPU speed benchmark. See
+[Live video](#live-video-detection-tracking-and-counting-opencv). The helpers are unit-tested
+with pytest ([`tests/test_live_detect.py`](tests/test_live_detect.py)).
+
 ---
 
 ## Repository structure
 
 ```
-scripts/      prepare_dataset.py, evaluate.py, export_models.py, export_onnx.py, publish_to_hf.py
+scripts/      prepare_dataset.py, evaluate.py, export_models.py, export_onnx.py, publish_to_hf.py,
+              live_detect.py, export_openvino.py, benchmark_speed.py
 notebooks/    Kaggle training and evaluation notebooks
 knowledge/    components.json — knowledge cards
 space/        in-browser web demo (index.html, detector.js, components.json)
-tests/        unit tests for the web demo detector (node tests/detector.test.js)
+tests/        node tests/detector.test.js (web demo) · pytest tests/test_live_detect.py (video helpers)
 docs/         class list, dataset audit, training curves, test results, export reports
 ```
 
@@ -166,6 +244,20 @@ yolo train model=yolo26n.pt data=ec61_clean/data.yaml imgsz=640 epochs=100 patie
 python scripts/evaluate.py --weights runs/detect/train/weights/best.pt --data ec61_clean/data.yaml --split test --out eval/test
 python scripts/export_models.py --weights runs/detect/train/weights/best.pt --data ec61_clean/data.yaml --out release
 python scripts/export_onnx.py --weights runs/detect/train/weights/best.pt --data ec61_clean/data.yaml --out onnx
+pip install openvino
+python scripts/export_openvino.py --weights runs/detect/train/weights/best.pt --data ec61_clean/data.yaml --out openvino
+python scripts/make_test_video.py --images ec61_clean/test/images --out test_clip.mp4   # held-out test images -> video
+```
+
+Live video and the CPU benchmark run on a laptop:
+
+```bash
+pip install ultralytics==8.4.215 huggingface_hub lap openvino pytest
+python scripts/live_detect.py --source 0
+python scripts/benchmark_speed.py --video clip.mp4 --weights circuitcoach-yolo26n.pt circuitcoach-yolo26n.onnx \
+    circuitcoach-yolo26n_openvino_model circuitcoach-yolo26n_int8_openvino_model \
+    --accuracy docs/results/export_report.json docs/results/onnx_report.json docs/results/openvino_report.json
+pytest tests/test_live_detect.py
 ```
 
 ## Limitations
@@ -180,6 +272,8 @@ python scripts/export_onnx.py --weights runs/detect/train/weights/best.pt --data
 
 - [ ] **Phone test set** — 50–100 photos of real parts on ordinary desks, to measure real-world accuracy
 - [ ] **Android app** — offline, on-device detection with the 2.9 MB w8a32 model
+- [x] **Live video** — OpenCV pipeline with ByteTrack tracking and unique-part counts
+- [ ] CPU speed table (PyTorch / ONNX / OpenVINO FP32 / INT8) and a demo clip
 - [ ] Knowledge cards for the remaining 25 classes
 - [ ] Parts checklist for fixed practicals (e.g. "LED blink": are all the parts here?)
 
